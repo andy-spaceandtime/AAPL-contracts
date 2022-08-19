@@ -1,6 +1,6 @@
-import { BigNumberish, Contract, utils } from "ethers";
+import { BigNumberish, Contract } from "ethers";
 import { RPC_ENDPOINTS } from "../utils/constants";
-import { AAPLDataFeedABI, AAPLDataFeedProxyABI } from "../utils/abis";
+import { AAPLDataFeedABI } from "../utils/abis";
 import { readContract } from "../utils/io";
 import { toLong8 } from "../utils/math";
 

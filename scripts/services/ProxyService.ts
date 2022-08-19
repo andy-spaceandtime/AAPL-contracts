@@ -1,8 +1,7 @@
-import { Contract, utils } from "ethers";
+import { Contract } from "ethers";
 import { RPC_ENDPOINTS } from "../utils/constants";
-import { AAPLDataFeedABI, AAPLDataFeedProxyABI } from "../utils/abis";
+import { AAPLDataFeedProxyABI } from "../utils/abis";
 import { readContract } from "../utils/io";
-import { toLong8 } from "../utils/math";
 
 import CoreChainService from "./CoreChainService";
 import { TransactionReceipt } from "@ethersproject/providers";
