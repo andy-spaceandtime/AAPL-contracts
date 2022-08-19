@@ -1,35 +1,31 @@
-import { BigNumberish, Contract, utils } from "ethers";
+import { Contract, utils } from "ethers";
 import { RPC_ENDPOINTS } from "../utils/constants";
 import { AAPLDataFeedABI, AAPLDataFeedProxyABI } from "../utils/abis";
 import { readContract } from "../utils/io";
 import { toLong8 } from "../utils/math";
 
-import ProxyService from "./ProxyService";
+import CoreChainService from "./CoreChainService";
 import { TransactionReceipt } from "@ethersproject/providers";
 
-class AAPLDataFeedService extends ProxyService {
-  contract: Contract;
+class ProxyService extends CoreChainService {
+  proxy: Contract;
 
   constructor(chainId: keyof typeof RPC_ENDPOINTS) {
     super(chainId);
 
     const AAPLDataFeed = readContract("aapl-data-feed-proxy");
-    this.contract = new Contract(
+    this.proxy = new Contract(
       AAPLDataFeed.address,
-      AAPLDataFeedABI,
+      AAPLDataFeedProxyABI,
       this.wallet
     );
   }
 
-  async setLatestPrice(price: number): Promise<TransactionReceipt> {
-    const tx = await this.contract.setLatestPrice(toLong8(price));
+  async setImplementation(implementation: string): Promise<TransactionReceipt> {
+    const tx = await this.proxy.setImplementation(implementation);
     await tx.wait();
     return tx;
   }
-
-  async getLatestPrice(): Promise<[BigNumberish, BigNumberish]> {
-    return this.contract.latestPrice();
-  }
 }
 
-export default AAPLDataFeedService;
+export default ProxyService;
