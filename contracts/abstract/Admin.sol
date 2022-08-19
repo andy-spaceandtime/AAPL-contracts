@@ -5,7 +5,7 @@ abstract contract Admin {
     address public admin;
 
     modifier onlyAdmin() {
-        require(msg.sender == getAdmin(), "HOLOGRAPH: admin only function");
+        require(msg.sender == getAdmin(), "admin only function");
         _;
     }
 
