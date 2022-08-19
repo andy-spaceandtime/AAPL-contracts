@@ -7,7 +7,11 @@ import type { ISupportedNetwork } from "../interface";
 dotenvConfig({ path: path.resolve(__dirname, "../../../.env") });
 
 console.log("DEPLOY_NETWORK: ", process.env.DEPLOY_NETWORK);
-type FileName = "aapl-tokenizer";
+type FileName =
+  | "aapl-tokenizer"
+  | "aapl-data-feed"
+  | "aapl-data-feed-proxy"
+  | "aapl-tokenizer-proxy";
 
 export const getNetwork = (): ISupportedNetwork => {
   const { DEPLOY_NETWORK } = process.env;

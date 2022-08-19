@@ -35,6 +35,7 @@ const SUPPORTED_CHAIN_NAMES = [
   "mumbai",
   "rinkeby",
   "kovan",
+  "gorli",
 ];
 
 const DEPLOYER: string = process.env.DEPLOYER_PRIVATE_KEY || "";
@@ -52,6 +53,8 @@ if (!etherscanApiKey) {
   throw new Error("Please set your ETHERSCAN_API_KEY in a .env file");
 }
 
+const polygonApiKey: string = process.env.POLYGONSCAN_API_KEY || "";
+
 function getChainConfig(
   chain: keyof typeof SUPPORTED_CHAINS
 ): NetworkUserConfig {
@@ -67,7 +70,7 @@ function getChainConfig(
       jsonRpcUrl = "https://bsc-dataseed1.binance.org";
       break;
     case "mumbai":
-      jsonRpcUrl = "https://matic-mumbai.chainstacklabs.com";
+      jsonRpcUrl = "https://rpc.ankr.com/polygon_mumbai";
       break;
     case "polygon":
       jsonRpcUrl = "https://polygon-rpc.com";
@@ -111,6 +114,7 @@ const config: HardhatUserConfig = {
     apiKey: {
       mainnet: etherscanApiKey,
       kovan: etherscanApiKey,
+      polygonMumbai: polygonApiKey,
     },
   },
 };
